@@ -62,3 +62,9 @@ class Blueprint:
 
     def __init__(self):
         self.blocks: dict[int, dict[int, dict[int, Block]]] = dict()
+
+    def add_block(self, block: Block) -> None:
+        """
+        Adds a block.
+        :param block: block type
+        """
