@@ -3,15 +3,45 @@ Application class
 """
 
 
+import argparse
+
+
 class Application:
     """
     Application class
     """
 
     def __init__(self):
-        pass
+        self.args: argparse.Namespace | None = None
+
+    def parse_args(self):
+        """
+        Parse CLI arguments
+        """
+
+        # make parser
+        parser = argparse.ArgumentParser(prog="SMC Card Maker", description="Scrap Mechanic Computer Card Maker")
+
+        # add arguments
+        parser.add_argument("-i", "--input",
+                            help="input file",
+                            required=True)
+        parser.add_argument("-t", "--type",
+                            help="input file type",
+                            choices=["QCPU", "MCPU2.0"],
+                            required=True)
+        parser.add_argument("--use-color",
+                            help="output color compressed cards (default: 5)",
+                            type=int,
+                            default=5)
+
+        # parse
+        self.args = parser.parse_args()
 
     def run(self):
         """
         Runs the application
         """
+
+        # parse CLI arguments
+        self.parse_args()
