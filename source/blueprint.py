@@ -35,6 +35,12 @@ BLOCK_TEMPLATE = """
 }
 """
 
+BLOCKS: dict[str, str] = {
+    "concrete": "a6c6ce30-dd47-4587-b475-085d55c6a3b4",
+    "glass": "5f41af56-df4c-4837-9b3c-10781335757f",
+    "plastic": "628b2d61-5ceb-43e9-8334-a4135566df7a"
+}
+
 
 class Blueprint:
     """
