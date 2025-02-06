@@ -3,6 +3,7 @@ Blueprint making stuff
 """
 
 
+import json
 from typing import Sequence
 
 
@@ -11,7 +12,6 @@ BLUEPRINT_TEMPLATE = """
   "bodies": [
     {
       "childs": [
-        {block_section}
       ]
     }
   ],
@@ -50,8 +50,9 @@ class Block:
     Block container class
     """
 
-    def __init__(self, position: Sequence[int], block: str):
+    def __init__(self, position: Sequence[int], block: str, color: str):
         self.position: Sequence[int] = position
+        self.color: str = color
         self.type: str = block
 
     @property
@@ -108,3 +109,31 @@ class Blueprint:
         if x not in self.blocks[z][y]:
             return None
         return self.blocks[z][y][x]
+
+    def json(self) -> dict:
+        """
+        Output JSON blueprint object
+        """
+
+        # append all blocks
+        blocks = []
+        for z in self.blocks:
+            for y in self.blocks[z]:
+                for x in self.blocks[z][y]:
+                    block_temp = json.loads(BLOCK_TEMPLATE.format(
+                        size_x=1,
+                        size_y=1,
+                        size_z=1,
+                        pos_x=x,
+                        pos_y=y,
+                        pos_z=z,
+                        block_id=BLOCKS[self.blocks[z][y][x].type],
+                        color=self.blocks[z][y][x].color))
+                    blocks.append(block_temp)
+
+        # make blueprint body
+        out = json.loads(BLUEPRINT_TEMPLATE)
+        out["bodies"][0]["childs"] = out
+
+        # return output
+        return out
