@@ -6,7 +6,6 @@ Blueprint making stuff
 from typing import Iterable
 
 
-
 BLUEPRINT_TEMPLATE = """
 {
   "bodies": [
