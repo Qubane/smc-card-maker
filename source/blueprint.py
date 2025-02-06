@@ -80,3 +80,14 @@ class Blueprint:
         Adds a block.
         :param block: block type
         """
+
+        # make sure position exists
+        if block.z not in self.blocks:
+            self.blocks = dict()
+        if block.y not in self.blocks[block.z]:
+            self.blocks[block.z] = dict()
+        if block.x not in self.blocks[block.z][block.y]:
+            self.blocks[block.z][block.y] = dict()
+
+        # add block
+        self.blocks[block.z][block.y][block.x] = block
