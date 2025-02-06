@@ -17,3 +17,14 @@ class CardMaker:
         Makes a card
         """
 
+
+class QCPUCardMaker(CardMaker):
+    """
+    Quantum CPU architecture card maker
+    """
+
+    @staticmethod
+    def make_card(data: bytes) -> Any:
+        """
+        Makes a card for QCPU's
+        """
