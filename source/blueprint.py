@@ -3,7 +3,7 @@ Blueprint making stuff
 """
 
 
-from typing import Iterable
+from typing import Sequence
 
 
 BLUEPRINT_TEMPLATE = """
@@ -50,9 +50,21 @@ class Block:
     Block container class
     """
 
-    def __init__(self, position: Iterable[int], block: str):
-        self.position: Iterable[int] = position
+    def __init__(self, position: Sequence[int], block: str):
+        self.position: Sequence[int] = position
         self.type: str = block
+
+    @property
+    def x(self) -> int:
+        return self.position[0]
+
+    @property
+    def y(self) -> int:
+        return self.position[1]
+
+    @property
+    def z(self) -> int:
+        return self.position[2]
 
 
 class Blueprint:
