@@ -27,7 +27,7 @@ BLOCK_TEMPLATE = """
     "y": {size_y},
     "z": {size_z}
   },
-  "color": "8D8F89",
+  "color": "{color}",
   "pos": {
     "x": {pos_x},
     "y": {pos_y},
@@ -62,4 +62,4 @@ class Blueprint:
     """
 
     def __init__(self):
-        pass
+        self.blocks: dict[int, dict[int, dict[int, Block]]] = dict()
