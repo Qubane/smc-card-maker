@@ -31,7 +31,7 @@ class Application:
                             choices=["QCPU", "MCPU2.0"],
                             required=True)
         parser.add_argument("--use-color",
-                            help="output color compressed cards (default: 5)",
+                            help="output color compressed cards",
                             type=int,
                             default=0)
 
