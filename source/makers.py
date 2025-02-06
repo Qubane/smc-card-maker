@@ -28,3 +28,15 @@ class QCPUCardMaker(CardMaker):
         """
         Makes a card for QCPU's
         """
+
+
+class MCPU20CardMaker(CardMaker):
+    """
+    @Mureccell's CPU 2.0 CardMaker
+    """
+
+    @staticmethod
+    def make_card(data: str) -> Any:
+        """
+        Makes a card for @Mureccell's CPU 2.0
+        """
