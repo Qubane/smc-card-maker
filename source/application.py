@@ -33,7 +33,7 @@ class Application:
         parser.add_argument("--use-color",
                             help="output color compressed cards (default: 5)",
                             type=int,
-                            default=5)
+                            default=0)
 
         # parse
         self.args = parser.parse_args()
