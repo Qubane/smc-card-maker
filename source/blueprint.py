@@ -3,6 +3,10 @@ Blueprint making stuff
 """
 
 
+from typing import Iterable
+
+
+
 BLUEPRINT_TEMPLATE = """
 {
   "bodies": [
@@ -40,6 +44,16 @@ BLOCKS: dict[str, str] = {
     "glass": "5f41af56-df4c-4837-9b3c-10781335757f",
     "plastic": "628b2d61-5ceb-43e9-8334-a4135566df7a"
 }
+
+
+class Block:
+    """
+    Block container class
+    """
+
+    def __init__(self, position: Iterable[int], block: str):
+        self.position: Iterable[int] = position
+        self.type: str = block
 
 
 class Blueprint:
