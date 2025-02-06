@@ -91,3 +91,20 @@ class Blueprint:
 
         # add block
         self.blocks[block.z][block.y][block.x] = block
+
+    def get_block(self, position: Sequence[int]) -> Block | None:
+        """
+        Returns a block or None for given position.
+        :param position: position
+        :return: Block or None
+        """
+
+        x, y, z = position
+
+        if z not in self.blocks:
+            return None
+        if y not in self.blocks[z]:
+            return None
+        if x not in self.blocks[z][y]:
+            return None
+        return self.blocks[z][y][x]
