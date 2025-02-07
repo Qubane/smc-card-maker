@@ -120,3 +120,15 @@ class MCPU20CardMaker(CardMaker):
         :param instructions: list of int instructions
         :return: json object card blueprint
         """
+
+        blueprint = Blueprint()
+        for instruction_idx, instruction in enumerate(instructions):
+            for idx, value in enumerate([instruction & (1 << x) for x in range(32)]):
+                # pick color
+                color = Colors.BLUE_3 if value else Colors.GRAY_0
+
+                # make blocks
+                blueprint.add_block(Block((idx, instruction_idx, 0), "plastic", color))
+                blueprint.add_block(Block((idx, instruction_idx, 1), "glass", Colors.GRAY_3))
+
+        return blueprint.json()
