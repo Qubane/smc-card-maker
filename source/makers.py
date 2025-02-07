@@ -3,7 +3,10 @@ Card makers
 """
 
 
+from math import ceil
 from io import BytesIO
+from source.classes import Colors
+from source.blueprint import Block, Blueprint
 
 
 class CardMaker:
@@ -60,6 +63,30 @@ class QCPUCardMaker(CardMaker):
         :param instructions: list of bytes instructions
         :return: json object card blueprint
         """
+
+        # magic values
+        mask_size = 5  # 5 bits
+        mask = 2**mask_size - 1  # 5 bits per color
+        splits = ceil(24 / 5)  # 24 bit instruction size divided by size of mask in bits
+
+        blueprint = Blueprint()
+        for instruction_idx, instruction in enumerate(instructions):
+            i_value = int.from_bytes(instruction)
+            # shift the mask around the binary value, and cut out the part that is needed
+            colors = [(i_value & (mask << (x * mask_size))) >> (x * mask_size) for x in range(splits-1, -1, -1)]
+
+            # go through colors and add them as blocks
+            for color_idx, color in enumerate(colors):
+                # make color
+                str_color = Colors.ALL[color]
+
+                # make block
+                block = Block((color_idx, instruction_idx, 0), "plastic", str_color)
+
+                # add blocks to blueprint
+                blueprint.add_block(block)
+
+        return blueprint.json()
 
 
 class MCPU20CardMaker(CardMaker):
