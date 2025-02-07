@@ -3,6 +3,7 @@ Application class
 """
 
 
+import os
 import json
 import argparse
 from source.makers import *
@@ -40,10 +41,22 @@ class Application:
         # parse
         self.args = parser.parse_args()
 
+    @staticmethod
+    def ensure_directories():
+        """
+        Ensures some of the directories exist
+        """
+
+        if not os.path.isdir("blueprints"):
+            os.mkdir("blueprints")
+
     def run(self):
         """
         Runs the application
         """
+
+        # ensure directories
+        self.ensure_directories()
 
         # parse CLI arguments
         self.parse_args()
