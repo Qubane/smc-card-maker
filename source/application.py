@@ -30,10 +30,6 @@ class Application:
                             help="input file type",
                             choices=["QCPU", "MCPU2.0"],
                             required=True)
-        parser.add_argument("--use-color",
-                            help="output color compressed cards",
-                            type=int,
-                            default=0)
 
         # parse
         self.args = parser.parse_args()
