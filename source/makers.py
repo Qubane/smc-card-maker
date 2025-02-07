@@ -12,7 +12,7 @@ class CardMaker:
     """
 
     @staticmethod
-    def make_card(data: bytes) -> Any:
+    def make_card(data: bytes) -> dict:
         """
         Makes a card
         """
@@ -24,7 +24,7 @@ class QCPUCardMaker(CardMaker):
     """
 
     @staticmethod
-    def make_card(data: bytes) -> Any:
+    def make_card(data: bytes) -> dict:
         """
         Makes a card for QCPU's
         """
@@ -36,7 +36,7 @@ class MCPU20CardMaker(CardMaker):
     """
 
     @staticmethod
-    def make_card(data: bytes) -> Any:
+    def make_card(data: bytes) -> dict:
         """
         Makes a card for @Mureccell's CPU 2.0
         """
