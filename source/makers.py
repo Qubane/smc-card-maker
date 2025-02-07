@@ -50,8 +50,11 @@ class QCPUCardMaker(CardMaker):
         while word := stream.read(offset):
             instructions.append(word)
 
+        # make and return card
+        return QCPUCardMaker._make_qt_card(instructions)
+
     @staticmethod
-    def _make_qt_card(instructions: list[bytes]):
+    def _make_qt_card(instructions: list[bytes]) -> dict:
         """
         Makes a program card for QT CPU linage
         :param instructions: list of bytes instructions
