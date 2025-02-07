@@ -3,7 +3,9 @@ Application class
 """
 
 
+import json
 import argparse
+from source.makers import *
 
 
 class Application:
@@ -30,6 +32,10 @@ class Application:
                             help="input file type",
                             choices=["QCPU", "MCPU2.0"],
                             required=True)
+        parser.add_argument("--prettify",
+                            help="write 'blueprint.json' with indents",
+                            action="store_true",
+                            default=False)
 
         # parse
         self.args = parser.parse_args()
@@ -41,3 +47,20 @@ class Application:
 
         # parse CLI arguments
         self.parse_args()
+
+        # read input file
+        with open(self.args.input, "rb") as file:
+            data = file.read()
+
+        # make blueprint
+        if self.args.type == "QCPU":
+            blueprint = QCPUCardMaker.make_card(data)
+        elif self.args.type == "MCPU2.0":
+            blueprint = MCPU20CardMaker.make_card(data)
+        else:
+            raise Exception
+
+        # make blueprint
+        indents = 2 if self.args.prettify else None
+        with open("blueprints/blueprint.json", "w", encoding="ASCII") as file:
+            file.write(json.dumps(blueprint, indent=indents))
