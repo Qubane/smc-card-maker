@@ -12,7 +12,7 @@ class CardMaker:
     """
 
     @staticmethod
-    def make_card(data: Any) -> Any:
+    def make_card(data: bytes) -> Any:
         """
         Makes a card
         """
@@ -36,7 +36,7 @@ class MCPU20CardMaker(CardMaker):
     """
 
     @staticmethod
-    def make_card(data: str) -> Any:
+    def make_card(data: bytes) -> Any:
         """
         Makes a card for @Mureccell's CPU 2.0
         """
