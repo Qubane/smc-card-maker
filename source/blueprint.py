@@ -20,22 +20,22 @@ BLUEPRINT_TEMPLATE = """
 """
 
 BLOCK_TEMPLATE = """
-{
-  "bounds": {
+{{
+  "bounds": {{
     "x": {size_x},
     "y": {size_y},
     "z": {size_z}
-  },
+  }},
   "color": "{color}",
-  "pos": {
+  "pos": {{
     "x": {pos_x},
     "y": {pos_y},
     "z": {pos_z}
-  },
+  }},
   "shapeId": "{block_id}",
   "xaxis": 1,
   "zaxis": 3
-}
+}}
 """
 
 BLOCKS: dict[str, str] = {
@@ -84,10 +84,8 @@ class Blueprint:
 
         # make sure position exists
         if block.z not in self.blocks:
-            self.blocks = dict()
-        if block.y not in self.blocks[block.z]:
             self.blocks[block.z] = dict()
-        if block.x not in self.blocks[block.z][block.y]:
+        if block.y not in self.blocks[block.z]:
             self.blocks[block.z][block.y] = dict()
 
         # add block
@@ -133,7 +131,7 @@ class Blueprint:
 
         # make blueprint body
         out = json.loads(BLUEPRINT_TEMPLATE)
-        out["bodies"][0]["childs"] = out
+        out["bodies"][0]["childs"] = blocks
 
         # return output
         return out
