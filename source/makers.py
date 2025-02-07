@@ -99,3 +99,24 @@ class MCPU20CardMaker(CardMaker):
         """
         Makes a card for @Mureccell's CPU 2.0
         """
+
+        # make stream
+        stream = BytesIO(data)
+
+        # read instructions
+        instructions: list[int] = []
+        while instruction := stream.read(32):
+            stream.read(2)  # skip '\r\n'
+            value = int(instruction, 2)  # convert string value to int
+            instructions.append(value)
+
+        # make and return card
+        return MCPU20CardMaker._make_card(instructions)
+
+    @staticmethod
+    def _make_card(instructions: list[int]) -> dict:
+        """
+        Makes a program card for @Mureccell's CPU
+        :param instructions: list of int instructions
+        :return: json object card blueprint
+        """
